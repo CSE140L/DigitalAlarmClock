@@ -1,4 +1,11 @@
-.PHONY: clean wasm
+.PHONY: clean wasm build
+
+CONTAINER ?= anishg24/cse140l:latest
+
+build:
+	podman run -it --rm -v $(PWD):/src $(CONTAINER) make wasm
+
+# These targets are meant to be run in the build container!
 
 TOP_LEVEL_DESIGN	?= DigitalAlarm
 VERILATOR_ROOT		 = /tools/verilator
@@ -17,9 +24,6 @@ obj_dir: verilog/
 $(OUTPUT_DIR): obj_dir models/wasm.cpp
 	mkdir -p $(OUTPUT_DIR)
 	$(EMCXX) -O3 -Iobj_dir -I$(VERILATOR_ROOT)/include models/wasm.cpp obj_dir/*.o -o "$(OUTPUT_DIR)/$(TOP_LEVEL_DESIGN).js"
-
-build:
-	podman run -it --rm -v $(PWD):/src anishg24/cse140l:latest make wasm
 
 clean:
 	$(RM) -r obj_dir $(OUTPUT_DIR)

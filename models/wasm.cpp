@@ -17,4 +17,23 @@ extern "C" {
       controller->CLR = 0;
       advance_clk();
     }
+
+    int EMSCRIPTEN_KEEPALIVE get_seven_segment_output(int digit) {
+      switch (digit) {
+        case 0:
+          return controller->SEC_SEG_1;
+        case 1:
+          return controller->SEC_SEG_2;
+        case 2:
+          return controller->MIN_SEG_1;
+        case 3:
+          return controller->MIN_SEG_2;
+        case 4:
+          return controller->HR_SEG_1;
+        case 5:
+          return controller->HR_SEG_2;
+        default:
+          return 0; 
+      }
+    }
 }

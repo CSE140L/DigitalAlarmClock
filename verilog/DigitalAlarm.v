@@ -181,48 +181,12 @@ module DigitalAlarm (
   input INC,
   input SET,
   input CLR,
-  output MIN_SEG_2_A,
-  output MIN_SEG_2B,
-  output MIN_SEG_2C,
-  output MIN_SEG_2D,
-  output MIN_SEG_2E,
-  output MIN_SEG_2F,
-  output MIN_SEG_2G,
-  output MIN_SEG_1A,
-  output MIN_SEG_1B,
-  output MIN_SEG_1C,
-  output MIN_SEG_1D,
-  output MIN_SEG_1E,
-  output MIN_SEG_1F,
-  output MIN_SEG_1G,
-  output SEC_SEG_2_A,
-  output SEC_SEG_2B,
-  output SEC_SEG_2C,
-  output SEC_SEG_2D,
-  output SEC_SEG_2E,
-  output SEC_SEG_2F,
-  output SEC_SEG_2G,
-  output SEC_SEG_1A,
-  output SEC_SEG_1B,
-  output SEC_SEG_1C,
-  output SEC_SEG_1D,
-  output SEC_SEG_1E,
-  output SEC_SEG_1F,
-  output SEC_SEG_1G,
-  output HOUR_SEG_2_A,
-  output HOUR_SEG_2B,
-  output HOUR_SEG_2C,
-  output HOUR_SEG_2D,
-  output HOUR_SEG_2E,
-  output HOUR_SEG_2F,
-  output HOUR_SEG_2G,
-  output HOUR_SEG_1A,
-  output HOUR_SEG_1B,
-  output HOUR_SEG_1C,
-  output HOUR_SEG_1D,
-  output HOUR_SEG_1E,
-  output HOUR_SEG_1F,
-  output HOUR_SEG_1G
+  output [6:0] SEC_SEG_1,
+  output [6:0] SEC_SEG_2,
+  output [6:0] MIN_SEG_1,
+  output [6:0] MIN_SEG_2,
+  output [6:0] HR_SEG_1,
+  output [6:0] HR_SEG_2
 );
   wire s0;
   wire [5:0] s1;
@@ -245,6 +209,48 @@ module DigitalAlarm (
   wire s18;
   wire s19;
   wire s20;
+  wire s21;
+  wire s22;
+  wire s23;
+  wire s24;
+  wire s25;
+  wire s26;
+  wire s27;
+  wire s28;
+  wire s29;
+  wire s30;
+  wire s31;
+  wire s32;
+  wire s33;
+  wire s34;
+  wire s35;
+  wire s36;
+  wire s37;
+  wire s38;
+  wire s39;
+  wire s40;
+  wire s41;
+  wire s42;
+  wire s43;
+  wire s44;
+  wire s45;
+  wire s46;
+  wire s47;
+  wire s48;
+  wire s49;
+  wire s50;
+  wire s51;
+  wire s52;
+  wire s53;
+  wire s54;
+  wire s55;
+  wire s56;
+  wire s57;
+  wire s58;
+  wire s59;
+  wire s60;
+  wire s61;
+  wire s62;
   assign s0 = ((CLK & ~ SET) | (SET & INC));
   ClockDev ClockDev_i0 (
     .EN( 1'b1 ),
@@ -260,93 +266,135 @@ module DigitalAlarm (
   assign s7 = s2[3];
   assign s8 = s2[4];
   assign s9 = s2[5];
-  assign s10 = s1[0];
-  assign s11 = s1[1];
-  assign s12 = s1[2];
-  assign s13 = s1[3];
-  assign s14 = s1[4];
-  assign s15 = s1[5];
-  assign s16 = s3[0];
-  assign s17 = s3[1];
-  assign s18 = s3[2];
-  assign s19 = s3[3];
-  assign s20 = s3[4];
+  assign s24 = s1[0];
+  assign s25 = s1[1];
+  assign s26 = s1[2];
+  assign s27 = s1[3];
+  assign s28 = s1[4];
+  assign s29 = s1[5];
+  assign s44 = s3[0];
+  assign s45 = s3[1];
+  assign s46 = s3[2];
+  assign s47 = s3[3];
+  assign s48 = s3[4];
   SevenSegmentDecoder SevenSegmentDecoder_i1 (
     .IN_0( s4 ),
     .IN_1( s5 ),
     .IN_2( s6 ),
     .IN_3( s7 ),
-    .A( MIN_SEG_2_A ),
-    .B( MIN_SEG_2B ),
-    .C( MIN_SEG_2C ),
-    .D( MIN_SEG_2D ),
-    .E( MIN_SEG_2E ),
-    .F( MIN_SEG_2F ),
-    .G( MIN_SEG_2G )
+    .A( s10 ),
+    .B( s11 ),
+    .C( s12 ),
+    .D( s13 ),
+    .E( s14 ),
+    .F( s15 ),
+    .G( s16 )
   );
   SevenSegmentDecoder SevenSegmentDecoder_i2 (
     .IN_0( s7 ),
     .IN_1( s8 ),
     .IN_2( s9 ),
     .IN_3( 1'b0 ),
-    .A( MIN_SEG_1A ),
-    .B( MIN_SEG_1B ),
-    .C( MIN_SEG_1C ),
-    .D( MIN_SEG_1D ),
-    .E( MIN_SEG_1E ),
-    .F( MIN_SEG_1F ),
-    .G( MIN_SEG_1G )
+    .A( s17 ),
+    .B( s18 ),
+    .C( s19 ),
+    .D( s20 ),
+    .E( s21 ),
+    .F( s22 ),
+    .G( s23 )
   );
   SevenSegmentDecoder SevenSegmentDecoder_i3 (
-    .IN_0( s10 ),
-    .IN_1( s11 ),
-    .IN_2( s12 ),
-    .IN_3( s13 ),
-    .A( SEC_SEG_2_A ),
-    .B( SEC_SEG_2B ),
-    .C( SEC_SEG_2C ),
-    .D( SEC_SEG_2D ),
-    .E( SEC_SEG_2E ),
-    .F( SEC_SEG_2F ),
-    .G( SEC_SEG_2G )
+    .IN_0( s24 ),
+    .IN_1( s25 ),
+    .IN_2( s26 ),
+    .IN_3( s27 ),
+    .A( s30 ),
+    .B( s31 ),
+    .C( s32 ),
+    .D( s33 ),
+    .E( s34 ),
+    .F( s35 ),
+    .G( s36 )
   );
   SevenSegmentDecoder SevenSegmentDecoder_i4 (
-    .IN_0( s13 ),
-    .IN_1( s14 ),
-    .IN_2( s15 ),
+    .IN_0( s27 ),
+    .IN_1( s28 ),
+    .IN_2( s29 ),
     .IN_3( 1'b0 ),
-    .A( SEC_SEG_1A ),
-    .B( SEC_SEG_1B ),
-    .C( SEC_SEG_1C ),
-    .D( SEC_SEG_1D ),
-    .E( SEC_SEG_1E ),
-    .F( SEC_SEG_1F ),
-    .G( SEC_SEG_1G )
+    .A( s37 ),
+    .B( s38 ),
+    .C( s39 ),
+    .D( s40 ),
+    .E( s41 ),
+    .F( s42 ),
+    .G( s43 )
   );
   SevenSegmentDecoder SevenSegmentDecoder_i5 (
-    .IN_0( s16 ),
-    .IN_1( s17 ),
-    .IN_2( s18 ),
-    .IN_3( s19 ),
-    .A( HOUR_SEG_2_A ),
-    .B( HOUR_SEG_2B ),
-    .C( HOUR_SEG_2C ),
-    .D( HOUR_SEG_2D ),
-    .E( HOUR_SEG_2E ),
-    .F( HOUR_SEG_2F ),
-    .G( HOUR_SEG_2G )
+    .IN_0( s44 ),
+    .IN_1( s45 ),
+    .IN_2( s46 ),
+    .IN_3( s47 ),
+    .A( s49 ),
+    .B( s50 ),
+    .C( s51 ),
+    .D( s52 ),
+    .E( s53 ),
+    .F( s54 ),
+    .G( s55 )
   );
   SevenSegmentDecoder SevenSegmentDecoder_i6 (
-    .IN_0( s19 ),
-    .IN_1( s20 ),
+    .IN_0( s47 ),
+    .IN_1( s48 ),
     .IN_2( 1'b0 ),
     .IN_3( 1'b0 ),
-    .A( HOUR_SEG_1A ),
-    .B( HOUR_SEG_1B ),
-    .C( HOUR_SEG_1C ),
-    .D( HOUR_SEG_1D ),
-    .E( HOUR_SEG_1E ),
-    .F( HOUR_SEG_1F ),
-    .G( HOUR_SEG_1G )
+    .A( s56 ),
+    .B( s57 ),
+    .C( s58 ),
+    .D( s59 ),
+    .E( s60 ),
+    .F( s61 ),
+    .G( s62 )
   );
+  assign SEC_SEG_1[0] = s30;
+  assign SEC_SEG_1[1] = s31;
+  assign SEC_SEG_1[2] = s32;
+  assign SEC_SEG_1[3] = s33;
+  assign SEC_SEG_1[4] = s34;
+  assign SEC_SEG_1[5] = s35;
+  assign SEC_SEG_1[6] = s36;
+  assign SEC_SEG_2[0] = s37;
+  assign SEC_SEG_2[1] = s38;
+  assign SEC_SEG_2[2] = s39;
+  assign SEC_SEG_2[3] = s40;
+  assign SEC_SEG_2[4] = s41;
+  assign SEC_SEG_2[5] = s42;
+  assign SEC_SEG_2[6] = s43;
+  assign MIN_SEG_1[0] = s10;
+  assign MIN_SEG_1[1] = s11;
+  assign MIN_SEG_1[2] = s12;
+  assign MIN_SEG_1[3] = s13;
+  assign MIN_SEG_1[4] = s14;
+  assign MIN_SEG_1[5] = s15;
+  assign MIN_SEG_1[6] = s16;
+  assign MIN_SEG_2[0] = s17;
+  assign MIN_SEG_2[1] = s18;
+  assign MIN_SEG_2[2] = s19;
+  assign MIN_SEG_2[3] = s20;
+  assign MIN_SEG_2[4] = s21;
+  assign MIN_SEG_2[5] = s22;
+  assign MIN_SEG_2[6] = s23;
+  assign HR_SEG_1[0] = s49;
+  assign HR_SEG_1[1] = s50;
+  assign HR_SEG_1[2] = s51;
+  assign HR_SEG_1[3] = s52;
+  assign HR_SEG_1[4] = s53;
+  assign HR_SEG_1[5] = s54;
+  assign HR_SEG_1[6] = s55;
+  assign HR_SEG_2[0] = s56;
+  assign HR_SEG_2[1] = s57;
+  assign HR_SEG_2[2] = s58;
+  assign HR_SEG_2[3] = s59;
+  assign HR_SEG_2[4] = s60;
+  assign HR_SEG_2[5] = s61;
+  assign HR_SEG_2[6] = s62;
 endmodule
