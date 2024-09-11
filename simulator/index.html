@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark" />
-<!--    <link rel="stylesheet" href="styles/pico.jade.min.css" />-->
+    <link rel="stylesheet" href="styles/pico.jade.min.css" />
     <link rel="stylesheet" href="styles/style.css" />
     <title>CSE 140L Alarm Clock</title>
     <script async type="text/javascript" src="scripts/wasm/DigitalAlarm.js"></script>
@@ -13,10 +13,18 @@
     <main class="container">
         <h1>Digital Alarm Clock</h1>
         <h2>CSE 140L: Project 1</h2>
-            <div id="vertical-center">
-                <div id="clock-container">
-                </div>
-            </div>
+        <div id="clock">
+            <svg width="0" height="0" viewBox="0 0 0 0">
+                <defs>
+                    <g id="unit-h">
+                        <path d="M0 20 L20 40 L180 40 L200 20 L180 0 L20 0 Z"></path>
+                    </g>
+                    <g id="unit-v">
+                        <path d="M20 0 L0 20 L0 180 L20 200 L40 180 L40 20 Z"></path>
+                    </g>
+                </defs>
+            </svg>
+        </div>
     </main>
     <script src="scripts/main.js"></script>
 </body>

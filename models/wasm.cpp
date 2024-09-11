@@ -36,4 +36,21 @@ extern "C" {
           return 0; 
       }
     }
+
+    void EMSCRIPTEN_KEEPALIVE enable_setup() {
+      controller->SET = 1;
+      advance_clk();
+    }
+
+    void EMSCRIPTEN_KEEPALIVE disable_setup() {
+      controller->SET = 0;
+      advance_clk();
+    }
+
+    void EMSCRIPTEN_KEEPALIVE increment() {
+      controller->INC = 1;
+      advance_clk();
+      controller->INC = 0;
+      advance_clk();
+    }
 }

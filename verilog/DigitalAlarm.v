@@ -127,7 +127,7 @@ module LUT_DECODER (
     initial begin
         my_lut[0] = 7'h7e;
         my_lut[1] = 7'h30;
-        my_lut[2] = 7'h35;
+        my_lut[2] = 7'h6d;
         my_lut[3] = 7'h79;
         my_lut[4] = 7'h33;
         my_lut[5] = 7'h5b;
@@ -135,12 +135,12 @@ module LUT_DECODER (
         my_lut[7] = 7'h70;
         my_lut[8] = 7'h7f;
         my_lut[9] = 7'h7b;
-        my_lut[10] = 7'h7e;
-        my_lut[11] = 7'h30;
-        my_lut[12] = 7'h35;
-        my_lut[13] = 7'h79;
-        my_lut[14] = 7'h33;
-        my_lut[15] = 7'h5b;
+        my_lut[10] = 7'h77;
+        my_lut[11] = 7'h1f;
+        my_lut[12] = 7'h4e;
+        my_lut[13] = 7'h3d;
+        my_lut[14] = 7'h4f;
+        my_lut[15] = 7'h47;
     end
 endmodule
 
@@ -167,13 +167,86 @@ module SevenSegmentDecoder (
     .\3 ( IN_3 ),
     .out( s0 )
   );
-  assign A = s0[0];
-  assign B = s0[1];
-  assign C = s0[2];
+  assign A = s0[6];
+  assign B = s0[5];
+  assign C = s0[4];
   assign D = s0[3];
-  assign E = s0[4];
-  assign F = s0[5];
-  assign G = s0[6];
+  assign E = s0[2];
+  assign F = s0[1];
+  assign G = s0[0];
+endmodule
+
+module \2DisplayDriver  (
+  input [5:0] DATA_IN,
+  output [6:0] SEG_1,
+  output [6:0] SEG_2
+);
+  wire s0;
+  wire s1;
+  wire s2;
+  wire s3;
+  wire s4;
+  wire s5;
+  wire s6;
+  wire s7;
+  wire s8;
+  wire s9;
+  wire s10;
+  wire s11;
+  wire s12;
+  wire s13;
+  wire s14;
+  wire s15;
+  wire s16;
+  wire s17;
+  wire s18;
+  wire s19;
+  assign s0 = DATA_IN[0];
+  assign s1 = DATA_IN[1];
+  assign s2 = DATA_IN[2];
+  assign s3 = DATA_IN[3];
+  assign s11 = DATA_IN[4];
+  assign s12 = DATA_IN[5];
+  SevenSegmentDecoder SevenSegmentDecoder_i0 (
+    .IN_0( s0 ),
+    .IN_1( s1 ),
+    .IN_2( s2 ),
+    .IN_3( s3 ),
+    .A( s4 ),
+    .B( s5 ),
+    .C( s6 ),
+    .D( s7 ),
+    .E( s8 ),
+    .F( s9 ),
+    .G( s10 )
+  );
+  SevenSegmentDecoder SevenSegmentDecoder_i1 (
+    .IN_0( s11 ),
+    .IN_1( s12 ),
+    .IN_2( 1'b0 ),
+    .IN_3( 1'b0 ),
+    .A( s13 ),
+    .B( s14 ),
+    .C( s15 ),
+    .D( s16 ),
+    .E( s17 ),
+    .F( s18 ),
+    .G( s19 )
+  );
+  assign SEG_1[0] = s4;
+  assign SEG_1[1] = s5;
+  assign SEG_1[2] = s6;
+  assign SEG_1[3] = s7;
+  assign SEG_1[4] = s8;
+  assign SEG_1[5] = s9;
+  assign SEG_1[6] = s10;
+  assign SEG_2[0] = s13;
+  assign SEG_2[1] = s14;
+  assign SEG_2[2] = s15;
+  assign SEG_2[3] = s16;
+  assign SEG_2[4] = s17;
+  assign SEG_2[5] = s18;
+  assign SEG_2[6] = s19;
 endmodule
 
 module DigitalAlarm (
@@ -192,65 +265,7 @@ module DigitalAlarm (
   wire [5:0] s1;
   wire [5:0] s2;
   wire [4:0] s3;
-  wire s4;
-  wire s5;
-  wire s6;
-  wire s7;
-  wire s8;
-  wire s9;
-  wire s10;
-  wire s11;
-  wire s12;
-  wire s13;
-  wire s14;
-  wire s15;
-  wire s16;
-  wire s17;
-  wire s18;
-  wire s19;
-  wire s20;
-  wire s21;
-  wire s22;
-  wire s23;
-  wire s24;
-  wire s25;
-  wire s26;
-  wire s27;
-  wire s28;
-  wire s29;
-  wire s30;
-  wire s31;
-  wire s32;
-  wire s33;
-  wire s34;
-  wire s35;
-  wire s36;
-  wire s37;
-  wire s38;
-  wire s39;
-  wire s40;
-  wire s41;
-  wire s42;
-  wire s43;
-  wire s44;
-  wire s45;
-  wire s46;
-  wire s47;
-  wire s48;
-  wire s49;
-  wire s50;
-  wire s51;
-  wire s52;
-  wire s53;
-  wire s54;
-  wire s55;
-  wire s56;
-  wire s57;
-  wire s58;
-  wire s59;
-  wire s60;
-  wire s61;
-  wire s62;
+  wire [5:0] s4;
   assign s0 = ((CLK & ~ SET) | (SET & INC));
   ClockDev ClockDev_i0 (
     .EN( 1'b1 ),
@@ -260,141 +275,21 @@ module DigitalAlarm (
     .MIN( s2 ),
     .HOUR( s3 )
   );
-  assign s4 = s2[0];
-  assign s5 = s2[1];
-  assign s6 = s2[2];
-  assign s7 = s2[3];
-  assign s8 = s2[4];
-  assign s9 = s2[5];
-  assign s24 = s1[0];
-  assign s25 = s1[1];
-  assign s26 = s1[2];
-  assign s27 = s1[3];
-  assign s28 = s1[4];
-  assign s29 = s1[5];
-  assign s44 = s3[0];
-  assign s45 = s3[1];
-  assign s46 = s3[2];
-  assign s47 = s3[3];
-  assign s48 = s3[4];
-  SevenSegmentDecoder SevenSegmentDecoder_i1 (
-    .IN_0( s4 ),
-    .IN_1( s5 ),
-    .IN_2( s6 ),
-    .IN_3( s7 ),
-    .A( s10 ),
-    .B( s11 ),
-    .C( s12 ),
-    .D( s13 ),
-    .E( s14 ),
-    .F( s15 ),
-    .G( s16 )
+  \2DisplayDriver  \2DisplayDriver_i1 (
+    .DATA_IN( s1 ),
+    .SEG_1( SEC_SEG_1 ),
+    .SEG_2( SEC_SEG_2 )
   );
-  SevenSegmentDecoder SevenSegmentDecoder_i2 (
-    .IN_0( s7 ),
-    .IN_1( s8 ),
-    .IN_2( s9 ),
-    .IN_3( 1'b0 ),
-    .A( s17 ),
-    .B( s18 ),
-    .C( s19 ),
-    .D( s20 ),
-    .E( s21 ),
-    .F( s22 ),
-    .G( s23 )
+  \2DisplayDriver  \2DisplayDriver_i2 (
+    .DATA_IN( s2 ),
+    .SEG_1( MIN_SEG_1 ),
+    .SEG_2( MIN_SEG_2 )
   );
-  SevenSegmentDecoder SevenSegmentDecoder_i3 (
-    .IN_0( s24 ),
-    .IN_1( s25 ),
-    .IN_2( s26 ),
-    .IN_3( s27 ),
-    .A( s30 ),
-    .B( s31 ),
-    .C( s32 ),
-    .D( s33 ),
-    .E( s34 ),
-    .F( s35 ),
-    .G( s36 )
+  assign s4[4:0] = s3;
+  assign s4[5] = 1'b0;
+  \2DisplayDriver  \2DisplayDriver_i3 (
+    .DATA_IN( s4 ),
+    .SEG_1( HR_SEG_1 ),
+    .SEG_2( HR_SEG_2 )
   );
-  SevenSegmentDecoder SevenSegmentDecoder_i4 (
-    .IN_0( s27 ),
-    .IN_1( s28 ),
-    .IN_2( s29 ),
-    .IN_3( 1'b0 ),
-    .A( s37 ),
-    .B( s38 ),
-    .C( s39 ),
-    .D( s40 ),
-    .E( s41 ),
-    .F( s42 ),
-    .G( s43 )
-  );
-  SevenSegmentDecoder SevenSegmentDecoder_i5 (
-    .IN_0( s44 ),
-    .IN_1( s45 ),
-    .IN_2( s46 ),
-    .IN_3( s47 ),
-    .A( s49 ),
-    .B( s50 ),
-    .C( s51 ),
-    .D( s52 ),
-    .E( s53 ),
-    .F( s54 ),
-    .G( s55 )
-  );
-  SevenSegmentDecoder SevenSegmentDecoder_i6 (
-    .IN_0( s47 ),
-    .IN_1( s48 ),
-    .IN_2( 1'b0 ),
-    .IN_3( 1'b0 ),
-    .A( s56 ),
-    .B( s57 ),
-    .C( s58 ),
-    .D( s59 ),
-    .E( s60 ),
-    .F( s61 ),
-    .G( s62 )
-  );
-  assign SEC_SEG_1[0] = s30;
-  assign SEC_SEG_1[1] = s31;
-  assign SEC_SEG_1[2] = s32;
-  assign SEC_SEG_1[3] = s33;
-  assign SEC_SEG_1[4] = s34;
-  assign SEC_SEG_1[5] = s35;
-  assign SEC_SEG_1[6] = s36;
-  assign SEC_SEG_2[0] = s37;
-  assign SEC_SEG_2[1] = s38;
-  assign SEC_SEG_2[2] = s39;
-  assign SEC_SEG_2[3] = s40;
-  assign SEC_SEG_2[4] = s41;
-  assign SEC_SEG_2[5] = s42;
-  assign SEC_SEG_2[6] = s43;
-  assign MIN_SEG_1[0] = s10;
-  assign MIN_SEG_1[1] = s11;
-  assign MIN_SEG_1[2] = s12;
-  assign MIN_SEG_1[3] = s13;
-  assign MIN_SEG_1[4] = s14;
-  assign MIN_SEG_1[5] = s15;
-  assign MIN_SEG_1[6] = s16;
-  assign MIN_SEG_2[0] = s17;
-  assign MIN_SEG_2[1] = s18;
-  assign MIN_SEG_2[2] = s19;
-  assign MIN_SEG_2[3] = s20;
-  assign MIN_SEG_2[4] = s21;
-  assign MIN_SEG_2[5] = s22;
-  assign MIN_SEG_2[6] = s23;
-  assign HR_SEG_1[0] = s49;
-  assign HR_SEG_1[1] = s50;
-  assign HR_SEG_1[2] = s51;
-  assign HR_SEG_1[3] = s52;
-  assign HR_SEG_1[4] = s53;
-  assign HR_SEG_1[5] = s54;
-  assign HR_SEG_1[6] = s55;
-  assign HR_SEG_2[0] = s56;
-  assign HR_SEG_2[1] = s57;
-  assign HR_SEG_2[2] = s58;
-  assign HR_SEG_2[3] = s59;
-  assign HR_SEG_2[4] = s60;
-  assign HR_SEG_2[5] = s61;
-  assign HR_SEG_2[6] = s62;
 endmodule
