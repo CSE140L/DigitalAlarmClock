@@ -37,3 +37,7 @@
 #clock svg .on {
     fill: #0984e3;
 }
+
+#clock svg .on.segment-green {
+    fill: #00b478;
+}

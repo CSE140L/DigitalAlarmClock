@@ -25,6 +25,21 @@
                 </defs>
             </svg>
         </div>
+        <article>
+            <div role="group">
+                <button id="base-switch" class="secondary" onclick="toggleBases()">Base-16</button>
+                <button id="setup-switch" onclick="toggleSetup()">Enter Setup</button>
+                <button id="increment-button" class="contrast" disabled onclick="increment()">Increment</button>
+            </div>
+            <label>
+                Number of Increments
+                <input id="num-increment" type="number" name="number" placeholder="Number of Increments" value="1">
+            </label>
+            <label>
+                Update Interval
+                <input id="update-interval" type="number" name="number" placeholder="Time (in ms)" value="1000" onchange="updateInterval()">
+            </label>
+        </article>
     </main>
     <script src="scripts/main.js"></script>
 </body>

@@ -1,5 +1,6 @@
 #include <emscripten.h>
 #include "VDigitalAlarm.h"
+#include "VDigitalAlarm___024root.h"
 
 auto* controller = new VDigitalAlarm;
 
@@ -52,5 +53,18 @@ extern "C" {
       advance_clk();
       controller->INC = 0;
       advance_clk();
+    }
+
+    int EMSCRIPTEN_KEEPALIVE get_counter_val(int counter) {
+      switch (counter) {
+        case 0:
+          return controller->rootp->DigitalAlarm__DOT__s1;
+        case 1:
+          return controller->rootp->DigitalAlarm__DOT__s2;
+        case 2:
+          return controller->rootp->DigitalAlarm__DOT__s3;
+        default:
+          return 0;
+      }
     }
 }

@@ -28,10 +28,66 @@ function setDisplay(id, bit_vector) {
     })
 }
 
+let digit_to_bit_vector = [0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x67, 0x77, 0x7c, 0x39, 0x5e, 0x79, 0x71]
+
 function setDisplays() {
-    Module._advance_clk()
-    for (let i = 5; i >= 0; i--) {
-        setDisplay(i, Module._get_seven_segment_output(i));
+    if (base10) {
+        let currentDisplay = 0;
+        for (let i = 0; i < 3; i++) {
+            let binary = Module._get_counter_val(i);
+            setDisplay(currentDisplay++, digit_to_bit_vector[binary % 10]);
+            setDisplay(currentDisplay++, digit_to_bit_vector[Math.floor(binary / 10)], )
+        }
+    } else {
+        for (let i = 5; i >= 0; i--) {
+            setDisplay(i, Module._get_seven_segment_output(i));
+        }
+    }
+}
+
+let base10 = false;
+function toggleBases() {
+    base10 = !base10;
+    for (const segment of document.getElementsByClassName("segment")) {
+        if (base10) {
+            segment.classList.add("segment-green");
+        } else {
+            segment.classList.remove("segment-green");
+        }
+    }
+    document.getElementById("base-switch").innerText = base10 ? "Base-10" : "Base-16"
+    setDisplays();
+}
+
+let setup = false;
+function toggleSetup() {
+    setup = !setup;
+    if (setup) {
+        Module._enable_setup();
+    } else {
+        Module._disable_setup();
+    }
+    document.getElementById("increment-button").disabled = !setup;
+    document.getElementById("setup-switch").innerText = setup ? "Exit Setup" : "Enter Setup"
+    setDisplays();
+}
+
+function increment() {
+    for (let i = 0; i < parseInt(document.getElementById("num-increment").value); i++) {
+        Module._increment()
+    }
+    setDisplays();
+}
+
+let currentInterval = setInterval(() => {Module._advance_clk();setDisplays();}, 1000);
+function updateInterval() {
+    const val = document.getElementById("update-interval").value
+    if (val > 0) {
+        document.getElementById("update-interval").setAttribute("aria-invalid", false);
+        clearInterval(currentInterval);
+        currentInterval = setInterval(() => {Module._advance_clk();setDisplays();}, parseInt(val));
+    } else {
+        document.getElementById("update-interval").setAttribute("aria-invalid", true);
     }
 }
 
@@ -39,4 +95,3 @@ for (let i = 5; i >= 0; i--) {
     clock_container.appendChild(createDisplay(i));
 }
 
-setInterval(setDisplays, 1000);
