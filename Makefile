@@ -31,7 +31,7 @@ OUTPUT_DIR        = ./simulator/scripts/wasm
 wasm: $(OUTPUT_DIR)/$(TOPLEVEL).js
 
 obj_dir: verilog/
-	$(VERILATOR_EXE) --cc --public ./verilog/*.v ./config.vlt
+	$(VERILATOR_EXE) --cc --public ./verilog/*.v
 	$(EMMAKE) make -C obj_dir -f V$(TOPLEVEL).mk
 
 $(OUTPUT_DIR)/$(TOPLEVEL).js: obj_dir models/wasm.cpp
