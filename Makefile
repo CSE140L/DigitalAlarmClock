@@ -5,6 +5,9 @@ PORT      ?= 8000
 
 all: build
 
+pull:
+	podman pull docker.io/$(CONTAINER)
+
 build:
 	podman run -it --rm -v ./:/src $(CONTAINER) make wasm
 
